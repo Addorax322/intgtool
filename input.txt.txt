@@ -1,0 +1,22 @@
+```python
+def count_valid_x(A, B):
+    mask = ~A & B
+    return 1 << bin(mask).count('1')
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    T = int(data[0])
+    index = 1
+    for _ in range(T):
+        A = int(data[index])
+        B = int(data[index + 1])
+        index += 2
+        print(count_valid_x(A, B))
+
+if __name__ == "__main__":
+    main()
+```
+
+ввод не заканчивается. Напиши только исправленный код

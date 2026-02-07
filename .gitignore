@@ -1,0 +1,12 @@
+# Config with API keys - do not commit
+config.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Output
+output/

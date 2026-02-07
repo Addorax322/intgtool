@@ -1,0 +1,51 @@
+# AI Integration Tool - Configuration
+# Copy to config.yaml and set API keys (or use environment variables)
+
+# Default model and provider (used when not specified per-request)
+default_provider: openrouter
+default_model: deepseek/deepseek-chat
+
+# Fallback chain: if one provider fails, try the next
+fallback_providers:
+  - openrouter
+  - yandex_gpt
+
+# Token limits (for chunking input and continuation)
+max_input_tokens: 4000   # per chunk sent to the model
+max_output_tokens: 4096  # max tokens per completion (increase for long answers)
+continuation_overlap: 200  # tokens of context to re-send when continuing
+
+# Retry and timeouts
+retry:
+  max_attempts: 3
+  min_delay_seconds: 1
+  max_delay_seconds: 30
+  timeout_seconds: 120
+
+# Output
+output:
+  directory: ./output
+  filename_prefix: output
+  extension: .txt
+
+# Provider-specific settings (API keys should come from env: OPENROUTER_API_KEY, YANDEX_API_KEY, etc.)
+providers:
+  openrouter:
+    enabled: true
+    base_url: https://openrouter.ai/api/v1
+    models:
+      - id: deepseek/deepseek-chat
+        supports_streaming: true
+      - id: deepseek/deepseek-r1
+        supports_streaming: true
+      - id: qwen/qwen-2.5-72b-instruct
+        supports_streaming: true
+      - id: mistralai/mistral-large
+        supports_streaming: true
+  yandex_gpt:
+    enabled: true
+    base_url: https://llm.api.cloud.yandex.net/foundationModels/v1
+    # folder_id: your_yandex_cloud_folder_id  # required; or set YANDEX_FOLDER_ID env
+    models:
+      - id: yandexgpt/latest
+        supports_streaming: true
