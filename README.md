@@ -1,18 +1,33 @@
 # AI Integration Tool
 
-A configurable, API-based system that interfaces with multiple AI providers (OpenRouter, YandexGPT, etc.), with chunking, auto-continuation, retries, and optional streaming.
+A configurable, API-based system that interfaces with multiple AI providers (OpenRouter, etc.), with chunking, auto-continuation, retries, and optional streaming.
 
 ## Features
 
-- **Multiple AI providers**: OpenRouter (DeepSeek, Qwen, Mistral, etc.) and YandexGPT out of the box; easy to add more.
+- **Multiple AI providers**: OpenRouter (DeepSeek, Qwen, Mistral, etc.) out of the box; easy to add more.
 - **Chunking**: Splits large input texts into token-sized chunks so they fit model limits.
 - **Long response handling**: Detects truncated replies and automatically requests continuation while keeping context.
 - **Error handling & retries**: Configurable retries with exponential backoff and timeouts; fallback to the next provider if one fails.
 - **Output management**: Saves responses to `output_1.txt`, `output_2.txt`, etc., in a configurable directory.
-- **Streaming**: Real-time streaming for providers that support it (e.g. OpenRouter, YandexGPT).
+- **Streaming**: Real-time streaming for providers that support it (e.g. OpenRouter).
 - **Flexible config**: YAML config and environment variables for API keys and model settings.
 
 ## Setup
+
+### Запуск на другом компьютере (скачать с GitHub)
+
+1. **Установите Python** (3.9+) и Git, если их ещё нет.
+2. **Скачайте проект** (клонирование репозитория):
+
+   ```bash
+   git clone https://github.com/Addorax322/intgtool.git
+   cd intgtool
+   ```
+
+3. Дальше — как в разделе Setup ниже: создайте venv, установите зависимости, скопируйте `config.example.yaml` в `config.yaml` и задайте API-ключи (или переменные окружения).
+4. **Запуск**: `python main.py "ваш запрос"` или `python main.py --input request.txt --output result.txt`.
+
+---
 
 1. **Clone or copy** the project and create a virtual environment:
 
@@ -34,7 +49,6 @@ A configurable, API-based system that interfaces with multiple AI providers (Ope
    - Copy `config.example.yaml` to `config.yaml`.
    - Set API keys via environment variables (recommended) or in `config.yaml`:
      - **OpenRouter**: `OPENROUTER_API_KEY` — get keys at [OpenRouter Settings](https://openrouter.ai/settings/keys).
-     - **YandexGPT**: `YANDEX_API_KEY` (IAM token or API key) and optionally `folder_id` in the provider config.
 
 ## Usage
 
@@ -64,8 +78,8 @@ A configurable, API-based system that interfaces with multiple AI providers (Ope
   ```
 
 - **Options**:
-  - `--model`, `-m`: Model ID (e.g. `deepseek/deepseek-r1`, `yandexgpt/latest`).
-  - `--provider`, `-p`: Force provider: `openrouter` or `yandex_gpt`.
+  - `--model`, `-m`: Model ID (e.g. `deepseek/deepseek-r1`).
+  - `--provider`, `-p`: Force provider: `openrouter`.
   - `--no-save`: Do not write output files.
   - `--config`, `-c`: Path to config YAML.
 
@@ -102,8 +116,7 @@ ai-integration-tool/
     ├── orchestrator.py    # Ties providers, chunking, retries, output
     └── providers/
         ├── base.py        # Abstract provider
-        ├── openrouter.py
-        └── yandex_gpt.py
+        └── openrouter.py
 ```
 
 ## License

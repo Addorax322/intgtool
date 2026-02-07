@@ -32,16 +32,11 @@ def _apply_env_overrides(cfg: dict[str, Any]) -> dict[str, Any]:
     providers = cfg.get("providers", {})
     env_map = {
         "openrouter": "OPENROUTER_API_KEY",
-        "yandex_gpt": "YANDEX_API_KEY",
     }
     for provider_id, env_var in env_map.items():
         if provider_id in providers and os.environ.get(env_var):
             if not isinstance(providers[provider_id], dict):
                 providers[provider_id] = {}
             providers[provider_id]["api_key"] = os.environ[env_var]
-    if "yandex_gpt" in providers and os.environ.get("YANDEX_FOLDER_ID"):
-        if not isinstance(providers["yandex_gpt"], dict):
-            providers["yandex_gpt"] = {}
-        providers["yandex_gpt"]["folder_id"] = os.environ["YANDEX_FOLDER_ID"]
     cfg["providers"] = providers
     return cfg

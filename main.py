@@ -57,13 +57,13 @@ def main() -> None:
         "--model", "-m",
         type=str,
         default=None,
-        help="Model ID (e.g. deepseek/deepseek-chat, yandexgpt/latest).",
+        help="Model ID (e.g. deepseek/deepseek-chat, deepseek/deepseek-r1).",
     )
     parser.add_argument(
         "--provider", "-p",
         type=str,
         default=None,
-        choices=["openrouter", "yandex_gpt"],
+        choices=["openrouter"],
         help="Force a specific provider.",
     )
     parser.add_argument(

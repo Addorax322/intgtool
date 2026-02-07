@@ -8,7 +8,6 @@ default_model: deepseek/deepseek-chat
 # Fallback chain: if one provider fails, try the next
 fallback_providers:
   - openrouter
-  - yandex_gpt
 
 # Token limits (for chunking input and continuation)
 max_input_tokens: 4000   # per chunk sent to the model
@@ -28,7 +27,7 @@ output:
   filename_prefix: output
   extension: .txt
 
-# Provider-specific settings (API keys should come from env: OPENROUTER_API_KEY, YANDEX_API_KEY, etc.)
+# Provider-specific settings (API keys should come from env: OPENROUTER_API_KEY, etc.)
 providers:
   openrouter:
     enabled: true
@@ -41,11 +40,4 @@ providers:
       - id: qwen/qwen-2.5-72b-instruct
         supports_streaming: true
       - id: mistralai/mistral-large
-        supports_streaming: true
-  yandex_gpt:
-    enabled: true
-    base_url: https://llm.api.cloud.yandex.net/foundationModels/v1
-    # folder_id: your_yandex_cloud_folder_id  # required; or set YANDEX_FOLDER_ID env
-    models:
-      - id: yandexgpt/latest
         supports_streaming: true

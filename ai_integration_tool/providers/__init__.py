@@ -1,13 +1,11 @@
-"""AI provider implementations (OpenRouter, YandexGPT, etc.)."""
+"""AI provider implementations (OpenRouter, etc.)."""
 from __future__ import annotations
 
 from .base import BaseProvider, ChatMessage, ProviderError
 from .openrouter import OpenRouterProvider
-from .yandex_gpt import YandexGPTProvider
 
 PROVIDER_REGISTRY: dict[str, type[BaseProvider]] = {
     "openrouter": OpenRouterProvider,
-    "yandex_gpt": YandexGPTProvider,
 }
 
 
