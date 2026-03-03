@@ -1,6 +1,5 @@
 # AI Integration Tool
 
-A configurable, API-based system that interfaces with multiple AI providers (OpenRouter, etc.), with chunking, auto-continuation, retries, and optional streaming.
 
 ## Features
 
